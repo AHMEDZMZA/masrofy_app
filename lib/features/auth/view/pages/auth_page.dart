@@ -1,0 +1,52 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:masrofy/core/extensions/build_context.dart';
+import 'package:masrofy/core/themes/app_colors.dart';
+import 'package:masrofy/core/themes/app_sizes.dart';
+import 'package:masrofy/core/widgets/app_scaffold.dart';
+import '../../../../core/extensions/widget_extension.dart';
+import '../widgets/app_logo.dart';
+import '../widgets/auth_btn.dart';
+
+class AuthPage extends StatelessWidget {
+  const AuthPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    /// final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isDark = context.isDarkMode;
+    return AppScaffold(
+      isDark: isDark,
+      child: Column(
+        children: [
+          const Spacer(flex: 2),
+          AppLogo(),
+          AppSizes.l.verticalSpace,
+          Text(
+            'Masrofy',
+            style: context.textTheme.displayLarge?.copyWith(
+              color: isDark ? AppColors.white : AppColors.primary,
+            ),
+          ),
+          AppSizes.l.verticalSpace,
+          Text(
+            'Welcome to Masrofy',
+            style: context.textTheme.titleSmall?.copyWith(
+              color: isDark ? AppColors.white : AppColors.primary,
+            ),
+          ),
+          AppSizes.l.verticalSpace,
+          Text(
+            'Manage your expenses, debts, and financial goals all in one place.',
+            style: context.textTheme.titleSmall?.copyWith(
+              color: isDark ? AppColors.grey100 : AppColors.primary,
+            ),
+          ),
+          AppSizes.l.verticalSpace,
+          AuthBtn().paddingHorizontal(AppSizes.s),
+          Spacer(),
+        ],
+      ),
+    );
+  }
+}
