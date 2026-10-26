@@ -21,11 +21,11 @@ class MyApp extends ConsumerWidget {
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp.router(
-            locale: context.locale,
+            locale: Locale('ar'),
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
             debugShowCheckedModeBanner: false,
-            title: "Masrofy",
+            title: 'مصروفي',
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,
             themeMode: themeMode,

@@ -12,7 +12,7 @@ class AuthBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      text: 'Sign up with Google',
+      text: "التسجيل من خلال جوجل",
       variant: ButtonVariant.outlined,
       onPressed: () {
         context.go(AppRoutes.home);

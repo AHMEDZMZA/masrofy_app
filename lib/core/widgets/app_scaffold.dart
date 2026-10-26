@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masrofy/core/extensions/widget_extension.dart';
 import 'package:masrofy/core/themes/app_colors.dart';
 
 class AppScaffold extends StatelessWidget {
@@ -28,7 +29,7 @@ class AppScaffold extends StatelessWidget {
                   ],
           ),
         ),
-        child: child,
+        child: child.safeArea(),
       ),
     );
   }

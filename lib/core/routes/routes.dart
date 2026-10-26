@@ -7,6 +7,15 @@ import 'app_routes.dart';
 final GoRouter appRouter = GoRouter(
   initialLocation: AppRoutes.auth,
   debugLogDiagnostics: true,
+  /*
+  debugLogDiagnostics: true
+  [GoRouter] Full paths for routes:
+  => /
+  => /login
+  => /home
+[GoRouter] setting initial location /
+[GoRouter] going to /login
+   */
   routes: [
     GoRoute(
       path: AppRoutes.auth,

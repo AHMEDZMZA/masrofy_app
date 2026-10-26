@@ -23,21 +23,21 @@ class AuthPage extends StatelessWidget {
           AppLogo(),
           AppSizes.l.verticalSpace,
           Text(
-            'Masrofy',
+            "مصروفي",
             style: context.textTheme.displayLarge?.copyWith(
               color: isDark ? AppColors.white : AppColors.primary,
             ),
           ),
           AppSizes.l.verticalSpace,
           Text(
-            'Welcome to Masrofy',
+            "مرحبا بك مجددا في مصروفي",
             style: context.textTheme.titleSmall?.copyWith(
               color: isDark ? AppColors.white : AppColors.primary,
             ),
           ),
           AppSizes.l.verticalSpace,
           Text(
-            'Manage your expenses, debts, and financial goals all in one place.',
+            "أدر مصروفاتك وديونك وأهدافك المالية في مكان واحد",
             style: context.textTheme.titleSmall?.copyWith(
               color: isDark ? AppColors.grey100 : AppColors.primary,
             ),
