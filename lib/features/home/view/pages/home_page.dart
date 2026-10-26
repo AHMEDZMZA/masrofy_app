@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masrofy/features/home/view/widgets/home_bottom_navigation.dart';
+import '../tabs/expenses_tab.dart';
 import '../tabs/home_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     HomeTab(),
     SizedBox.shrink(),
     SizedBox.shrink(),
-    SizedBox.shrink(),
+    ExpensesTab(),
     SizedBox.shrink(),
   ];
 

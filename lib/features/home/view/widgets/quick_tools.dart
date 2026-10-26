@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
 import 'package:masrofy/core/extensions/num_extension.dart';
 import 'package:masrofy/core/extensions/widget_extension.dart';
 import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
+
+import '../../../../core/routes/app_routes.dart';
 
 class QuickTools extends StatelessWidget {
   const QuickTools({super.key});
@@ -16,25 +19,25 @@ class QuickTools extends StatelessWidget {
         'label': "الأهداف",
         'icon': Icons.track_changes_rounded,
         'color': AppColors.purple,
-        // 'route': AppRoutes.goals,
+        'route': AppRoutes.goals,
       },
       {
         'label': "الديون",
         'icon': Icons.account_balance_wallet_rounded,
         'color': AppColors.warning,
-        // 'route': AppRoutes.depts,
+        'route': AppRoutes.debts,
       },
       {
         'label': "الدخل",
         'icon': Icons.trending_up_rounded,
         'color': AppColors.income,
-        // 'route': AppRoutes.income,
+        'route': AppRoutes.income,
       },
       {
         'label': "المصاريف",
         'icon': Icons.shopping_bag_rounded,
         'color': AppColors.expense,
-        // 'route': '',
+        'route': '',
       },
     ];
 
@@ -51,7 +54,7 @@ class QuickTools extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: tools.map((tool) {
             final color = tool['color'] as Color;
-            //final route = tool['route'] as String;
+            final route = tool['route'] as String;
 
             return Container(
               width: 76.w,
@@ -75,9 +78,9 @@ class QuickTools extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  // if (route.isNotEmpty) {
-                  //   context.push(route);
-                  // }
+                  if (route.isNotEmpty) {
+                    context.push(route);
+                  }
                 },
                 borderRadius: AppSizes.rL.radius,
                 child: Column(
