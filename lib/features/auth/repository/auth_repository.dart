@@ -7,7 +7,7 @@ import 'package:masrofy/features/auth/models/user_model.dart';
 import '../../../core/service/firebase_service.dart';
 
 class AuthRepository {
-  /// call firestore , auth , google singin
+  /// call firestore , auth , google sing in
 
   final FirebaseAuth _auth;
   final FirebaseFirestore _firestore;
@@ -21,7 +21,7 @@ class AuthRepository {
        _firestore = firestore,
        _googleSignIn = googleSignIn;
 
-  // build singin fun
+  // build sing in fun
 
   Future<UserCredential?> signInWithGoogle() async {
     /// 1- open and choose email

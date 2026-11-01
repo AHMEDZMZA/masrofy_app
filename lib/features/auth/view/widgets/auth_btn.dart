@@ -7,7 +7,7 @@ import 'package:masrofy/core/routes/app_routes.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
 import 'package:masrofy/core/widgets/custom_button.dart';
 
-import '../../providers/auth_provider.dart';
+import '../../controllers/auth_controller.dart';
 
 class AuthBtn extends ConsumerWidget {
   const AuthBtn({super.key});
