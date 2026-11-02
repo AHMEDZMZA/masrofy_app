@@ -10,7 +10,7 @@ import 'package:masrofy/core/themes/app_sizes.dart';
 import 'package:masrofy/features/debts/controllers/debts_controller.dart';
 import 'package:masrofy/features/debts/model/debts_model.dart';
 import '../../../../core/widgets/app_scaffold.dart';
-import '../../../income/view/pages/income_page.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
 import '../widgets/debt_card.dart';
 import '../widgets/debts_form.dart';
 import '../widgets/debts_summery_card.dart';

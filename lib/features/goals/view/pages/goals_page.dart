@@ -9,7 +9,7 @@ import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
 import 'package:masrofy/features/goals/model/goal_model.dart';
 import '../../../../core/widgets/app_scaffold.dart';
-import '../../../income/view/pages/income_page.dart';
+import '../../../../core/widgets/custom_app_bar.dart';
 import '../../controllers/goals_controller.dart';
 import '../widgets/goal_card.dart';
 import '../widgets/goal_form.dart';

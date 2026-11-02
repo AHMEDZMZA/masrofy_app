@@ -1,310 +1,172 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
-import 'package:masrofy/core/extensions/num_extension.dart';
 import 'package:masrofy/core/extensions/widget_extension.dart';
+import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
-import 'package:masrofy/core/widgets/app_scaffold.dart';
+import 'package:masrofy/core/widgets/custom_app_bar.dart';
+import 'package:masrofy/features/income/view/widgets/add_income_sheet.dart';
+import 'package:masrofy/features/income/view/widgets/income_source_card.dart';
+import 'package:masrofy/features/income/view/widgets/income_summary_card.dart';
+import '../../../../core/constants/months.dart';
+import '../../../../core/widgets/app_scaffold.dart';
+import '../../controllers/income_controller.dart';
 
-import '../../../../core/constants/app_assets.dart';
-import '../../../../core/themes/app_colors.dart';
-
-class IncomePage extends StatelessWidget {
+class IncomePage extends ConsumerStatefulWidget {
   const IncomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> incomeSources = [
-      {
-        'title': 'الراتب الشهري',
-        'subtitle': 'الشركة الحالية',
-        'amount': '20,000',
-        'frequency': 'كل شهر',
-        'icon': Icons.business_center_rounded,
-        'color': AppColors.primary,
-      },
-      {
-        'title': 'عمل حر',
-        'subtitle': 'مشاريع مستقلة',
-        'amount': '5,000',
-        'frequency': 'كل شهر',
-        'icon': Icons.laptop_mac_rounded,
-        'color': AppColors.primary,
-      },
-      {
-        'title': 'استثمار',
-        'subtitle': 'أرباح الاستثمار',
-        'amount': '2,500',
-        'frequency': 'كل 3 أشهر',
-        'icon': Icons.trending_up_rounded,
-        'color': AppColors.accent,
-      },
-      {
-        'title': 'أخرى',
-        'subtitle': 'دخل إضافي',
-        'amount': '350',
-        'frequency': 'عند الحاجة',
-        'icon': Icons.more_horiz_rounded,
-        'color': AppColors.purple,
-      },
-    ];
+  ConsumerState<IncomePage> createState() => _IncomePageState();
+}
 
+class _IncomePageState extends ConsumerState<IncomePage> {
+  int _selMonth = DateTime.now().month;
+  int _selYear = DateTime.now().year;
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(incomeControllerProvider);
     return AppScaffold(
       isDark: context.isDarkMode,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /// Header Row
-            CustomAppBar(title: 'مصادر الدخل'),
+            CustomAppBar(
+              title: 'الدخل',
+              addNewItem: () => AddIncomeBottomSheet.show(context),
+            ),
             AppSizes.m.verticalSpace,
+            state.when(
+              loading: () =>
+                  const CircularProgressIndicator().center().paddingAll(24),
+              error: (_, _) => Text(
+                'تعذر تحميل الدخل',
+                style: context.textTheme.bodyMedium,
+              ).center().paddingAll(24),
+              data: (entries) {
+                final filtered = entries
+                    .where((e) => e.month == _selMonth && e.year == _selYear)
+                    .toList();
+                final total = filtered.fold<double>(
+                  0,
+                  (sum, e) => sum + e.amount,
+                );
+                final keys = {
+                  '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}',
+                  ...entries.map((e) => e.monthYear),
+                }.toList()..sort((a, b) => b.compareTo(a));
 
-            /// Summary Card
-            const _IncomeSummaryCard(),
-
-            AppSizes.m.verticalSpace,
-
-            /// List of Income Sources
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => AppSizes.m.verticalSpace,
-              itemCount: incomeSources.length,
-              itemBuilder: (context, index) {
-                final item = incomeSources[index];
-                return _IncomeSourceCard(
-                  title: item['title'] as String,
-                  subtitle: item['subtitle'] as String,
-                  amount: item['amount'] as String,
-                  frequency: item['frequency'] as String,
-                  icon: item['icon'] as IconData,
-                  color: item['color'] as Color,
+                return Column(
+                  children: [
+                    IncomeSummaryCard(
+                      totalIncome: total,
+                      entryCount: filtered.length,
+                      monthLabel: '${months[_selMonth - 1]} $_selYear',
+                    ),
+                    AppSizes.l.verticalSpace,
+                    SizedBox(
+                      height: 36.h,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        reverse: true,
+                        itemCount: keys.length,
+                        separatorBuilder: (_, _) => 8.horizontalSpace,
+                        itemBuilder: (context, i) {
+                          final p = keys[i].split('-');
+                          final y = int.parse(p[0]), m = int.parse(p[1]);
+                          final active = _selMonth == m && _selYear == y;
+                          return GestureDetector(
+                            onTap: () => setState(() {
+                              _selMonth = m;
+                              _selYear = y;
+                            }),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                                vertical: 8.h,
+                              ),
+                              decoration: BoxDecoration(
+                                color: active
+                                    ? AppColors.income
+                                    : (context.isDarkMode
+                                          ? AppColors.cardDark
+                                          : AppColors.grey100),
+                                borderRadius: BorderRadius.circular(
+                                  AppSizes.rM,
+                                ),
+                                border: active
+                                    ? null
+                                    : Border.all(
+                                        color: context.isDarkMode
+                                            ? AppColors.borderDark
+                                            : AppColors.borderLight,
+                                      ),
+                              ),
+                              child: Text(
+                                '${months[m - 1]} $y',
+                                style: context.textTheme.bodySmall?.copyWith(
+                                  color: active
+                                      ? Colors.white
+                                      : (context.isDarkMode
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight),
+                                  fontWeight: active
+                                      ? FontWeight.bold
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    AppSizes.l.verticalSpace,
+                    if (filtered.isEmpty)
+                      Column(
+                        children: [
+                          AppSizes.xxl.verticalSpace,
+                          Icon(
+                            Icons.payments_outlined,
+                            size: AppSizes.iconXL,
+                            color: AppColors.grey400,
+                          ),
+                          AppSizes.m.verticalSpace,
+                          Text(
+                            'لا يوجد دخل مسجل لهذا الشهر',
+                            style: context.textTheme.bodyMedium?.copyWith(
+                              color: AppColors.grey500,
+                            ),
+                          ),
+                          AppSizes.m.verticalSpace,
+                          FilledButton.icon(
+                            onPressed: () => AddIncomeBottomSheet.show(context),
+                            icon: const Icon(Icons.add_rounded),
+                            label: const Text('إضافة دخل'),
+                          ),
+                        ],
+                      ).center()
+                    else
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: filtered.length,
+                        separatorBuilder: (_, _) => AppSizes.m.verticalSpace,
+                        itemBuilder: (context, idx) => IncomeSourceCard(
+                          entry: filtered[idx],
+                          onTap: () => AddIncomeBottomSheet.show(
+                            context,
+                            entry: filtered[idx],
+                          ),
+                        ),
+                      ),
+                  ],
                 );
               },
             ),
           ],
         ).paddingAll(AppSizes.screenPadding),
       ),
-    );
-  }
-}
-
-class _IncomeSourceCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String amount;
-  final String frequency;
-  final IconData icon;
-  final Color color;
-
-  const _IncomeSourceCard({
-    required this.title,
-    required this.subtitle,
-    required this.amount,
-    required this.frequency,
-    required this.icon,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = context.isDarkMode;
-    return Container(
-      padding: AppSizes.m.allPadding,
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.cardDark : Colors.white,
-        borderRadius: AppSizes.rL.radius,
-        border: Border.all(
-          color: isDark ? AppColors.borderDark : AppColors.borderLight,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // Right side: Icon and text information
-          Row(
-            children: [
-              Container(
-                width: 44.w,
-                height: 44.h,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(AppSizes.rM),
-                ),
-                child: Icon(icon, color: color, size: AppSizes.iconM),
-              ),
-              AppSizes.m.horizontalSpace,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  AppSizes.xs.verticalSpace,
-                  Text(
-                    subtitle,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          // Left side: Amount and frequency details
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '$amount EGP',
-                style: context.textTheme.titleMedium?.copyWith(
-                  color: AppColors.income,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              AppSizes.s.verticalSpace,
-              Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today_outlined,
-                    size: AppSizes.iconXS,
-                    color: isDark
-                        ? AppColors.textSecondaryDark
-                        : AppColors.textSecondaryLight,
-                  ),
-                  AppSizes.xs.horizontalSpace,
-                  Text(
-                    frequency,
-                    style: context.textTheme.bodySmall?.copyWith(
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _IncomeSummaryCard extends StatelessWidget {
-  const _IncomeSummaryCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: AppSizes.m.allPadding,
-      //padding: 16.allPadding,
-      decoration: BoxDecoration(
-        gradient: AppColors.walletGradient,
-        borderRadius: AppSizes.rXL.radius,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.15),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'اجمالى الدخل',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: Colors.white.withValues(alpha: 0.8),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              AppSizes.xs.verticalSpace,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                children: [
-                  Text('27,850', style: context.textTheme.headlineMedium),
-                  AppSizes.s.horizontalSpace,
-                  Text('EGP', style: context.textTheme.titleMedium),
-                ],
-              ),
-              AppSizes.m.verticalSpace,
-              // Period selection pill
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.15),
-                  borderRadius: AppSizes.rM.radius,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.keyboard_arrow_down_rounded,
-                      color: Colors.white,
-                      size: AppSizes.iconXS,
-                    ),
-                    AppSizes.xs.horizontalSpace,
-                    Text('هذا الشهر', style: context.textTheme.bodySmall),
-                  ],
-                ),
-              ),
-            ],
-          ).expanded(),
-          AppSizes.s.horizontalSpace,
-          Image.asset(
-            AppAssets.income,
-            width: 120.w,
-            height: 120.h,
-            fit: BoxFit.contain,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key, required this.title, this.addNewItem});
-
-  final String title;
-  final VoidCallback? addNewItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          onPressed: () => context.pop(),
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: context.colorScheme.onSurface,
-            size: AppSizes.iconM,
-          ),
-        ),
-        Text(title, style: context.textTheme.titleLarge),
-        IconButton(
-          onPressed: addNewItem,
-          icon: Icon(
-            Icons.add_rounded,
-            color: context.colorScheme.onSurface,
-            size: AppSizes.iconM,
-          ),
-        ),
-      ],
     );
   }
 }

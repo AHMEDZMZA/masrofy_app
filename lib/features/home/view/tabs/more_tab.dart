@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,9 @@ import 'package:masrofy/core/routes/app_routes.dart';
 import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
 import 'package:masrofy/core/themes/theme_mode_provider.dart';
+import '../../../../core/service/firebase_service.dart';
 import '../../../../core/widgets/app_scaffold.dart';
+import '../../../auth/controllers/auth_controller.dart';
 
 class MoreTab extends ConsumerWidget {
   const MoreTab({super.key});
@@ -18,6 +21,7 @@ class MoreTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentThemeMode = ref.watch(themeModeProvider);
+    final user = ref.watch(firebaseAuthProvider).currentUser;
 
     return AppScaffold(
       isDark: context.isDarkMode,
@@ -27,7 +31,7 @@ class MoreTab extends ConsumerWidget {
             Text("المزيد", style: context.textTheme.titleLarge),
             AppSizes.s.verticalSpace,
             // Profile Card Header
-            _buildProfileCard(context),
+            _buildProfileCard(context, user),
             AppSizes.l.verticalSpace,
 
             // Settings section list
@@ -45,7 +49,7 @@ class MoreTab extends ConsumerWidget {
             _buildSettingsSection(
               context: context,
               title: "الملف الشخصي",
-              items: [_buildLogoutTile(context)],
+              items: [_buildLogoutTile(context, ref)],
             ),
           ],
         ).paddingAll(AppSizes.screenPadding),
@@ -53,6 +57,59 @@ class MoreTab extends ConsumerWidget {
     );
   }
 
+  Widget _buildProfileCard(BuildContext context, User? user) {
+    final name = user?.displayName ?? 'مستخدم';
+    final email = user?.email ?? '';
+    final photoUrl = user?.photoURL;
+
+    return Container(
+      width: double.infinity,
+      padding: AppSizes.m.allPadding,
+      decoration: BoxDecoration(
+        gradient: AppColors.walletGradient,
+        borderRadius: AppSizes.rXL.radius,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primary.withValues(alpha: 0.25),
+            blurRadius: 15,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 30.r,
+            backgroundColor: Colors.white.withValues(alpha: 0.25),
+            backgroundImage: photoUrl != null ? NetworkImage(photoUrl) : null,
+            child: photoUrl == null
+                ? Icon(Icons.person_rounded, size: AppSizes.iconXL)
+                : null,
+          ),
+          AppSizes.m.horizontalSpace,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: context.textTheme.titleMedium?.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 4.h),
+              Text(
+                email,
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: Colors.white.withValues(alpha: 0.8),
+                ),
+              ),
+            ],
+          ).expanded(),
+        ],
+      ),
+    );
+  }
+/*
   Widget _buildProfileCard(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -95,6 +152,7 @@ class MoreTab extends ConsumerWidget {
       ),
     );
   }
+ */
 
   Widget _buildSettingsSection({
     required BuildContext context,
@@ -164,7 +222,7 @@ class MoreTab extends ConsumerWidget {
             ),
             textAlign: TextAlign.right,
           ).expanded(),
-          AppSizes.m.verticalSpace,
+          AppSizes.m.horizontalSpace,
           Text(
             modeName,
             style: context.textTheme.bodyMedium?.copyWith(
@@ -235,7 +293,7 @@ class MoreTab extends ConsumerWidget {
     );
   }
 
-  Widget _buildLogoutTile(BuildContext context) {
+  Widget _buildLogoutTile(BuildContext context, WidgetRef ref) {
     final isDark = context.isDarkMode;
     return ListTile(
       leading: Icon(
@@ -267,9 +325,9 @@ class MoreTab extends ConsumerWidget {
           size: 20,
         ),
       ),
-      onTap: () {
-        context.pop(); // close dialog
-        context.go(AppRoutes.auth); // navigate to login
+      onTap: () async {
+        await ref.read(authControllerProvider.notifier).signOut();
+        if (context.mounted) context.go(AppRoutes.auth);
       },
     );
   }
@@ -385,3 +443,89 @@ class MoreTab extends ConsumerWidget {
     );
   }
 }
+
+/*
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:masrofy/core/routes/app_routes.dart';
+import 'package:masrofy/core/themes/theme_mode_provider.dart';
+import '../../../../core/service/firebase_service.dart';
+import '../../../auth/controllers/auth_controller.dart';
+
+class MoreTab extends ConsumerWidget {
+  const MoreTab({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentThemeMode = ref.watch(themeModeProvider);
+    final user = ref.watch(firebaseAuthProvider).currentUser;
+
+    return Scaffold(
+      appBar: AppBar(title: Text('المزيد')),
+      body: ListView(
+        children: [
+          if (user != null)
+            ListTile(
+              leading: CircleAvatar(
+                backgroundImage: user.photoURL != null
+                    ? NetworkImage(user.photoURL!)
+                    : null,
+                child: user.photoURL == null ? const Icon(Icons.person) : null,
+              ),
+              title: Text(user.displayName ?? 'userName'.tr()),
+              subtitle: Text(user.email ?? 'userEmail'.tr()),
+            ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.brightness_6),
+            title: Text("تغيير المظهر"),
+            trailing: DropdownButton<ThemeMode>(
+              value: currentThemeMode,
+              onChanged: (mode) {
+                if (mode != null) {
+                  ref.read(themeModeProvider.notifier).setThemeMode(mode);
+                }
+              },
+              items: const [
+                DropdownMenuItem(
+                  value: ThemeMode.system,
+                  child: Text('التلقائي'),
+                ),
+                DropdownMenuItem(value: ThemeMode.light, child: Text('فاتح')),
+                DropdownMenuItem(value: ThemeMode.dark, child: Text('داكن')),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.language),
+            title: Text('تغيير اللغه'),
+            trailing: Text(
+              context.locale.languageCode == 'ar' ? 'العربية' : 'English',
+            ),
+            onTap: () {
+              final isArabic = context.locale.languageCode == 'ar';
+              context.setLocale(
+                isArabic ? const Locale('en') : const Locale('ar'),
+              );
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: Text(
+              'تسجيل الخروج',
+              style: const TextStyle(color: Colors.red),
+            ),
+            onTap: () {
+              ref.read(authControllerProvider.notifier).signOut();
+              context.go(AppRoutes.auth);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+ */
