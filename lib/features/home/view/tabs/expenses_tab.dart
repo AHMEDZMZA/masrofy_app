@@ -51,6 +51,7 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CustomAppBar(
+            showBackButton: false,
             title: 'المصروفات',
             addNewItem: () => AddExpenseBottomSheet.show(context),
           ).center(),

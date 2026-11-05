@@ -111,7 +111,11 @@ class GoalForm extends StatelessWidget {
                         ),
                       ),
                     FilledButton(
-                      onPressed: onSave,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          onSave();
+                        }
+                      },
                       child: Text(isEditing ? 'تحديث الهدف' : 'حفظ الهدف'),
                     ),
                   ],

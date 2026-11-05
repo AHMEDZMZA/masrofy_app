@@ -195,5 +195,26 @@
     "months_sep": "September",
     "months_oct": "October",
     "months_nov": "November",
-    "months_dec": "December"
+    "months_dec": "December",
+
+    "filter_this_month": "This Month",
+    "filter_last_month": "Last Month",
+    "filter_this_year": "This Year",
+    "filter_all": "All",
+
+    "reports_error_occurred": "Something went wrong",
+    "reports_from_last_year": "from last year",
+    "reports_no_expenses_period": "No expenses recorded for this period",
+
+    "currency_egp_short": "EGP",
+    "more_language_english": "English",
+    "goals_of_target": "of {target} EGP",
+
+    "common_cancel": "Cancel",
+    "common_delete": "Delete",
+    "common_save": "Save",
+    "common_edit": "Edit",
+    "common_confirm": "Confirm",
+    "common_close": "Close",
+    "common_retry": "Retry"
 }

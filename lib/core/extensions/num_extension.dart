@@ -10,4 +10,12 @@ extension NumExtension on num {
   EdgeInsets get verticalPadding => EdgeInsets.symmetric(vertical: r);
 
   BorderRadius get radius => BorderRadius.circular(r);
+
+  String get formatAmount {
+    final fixed = this % 1 == 0 ? toStringAsFixed(0) : toStringAsFixed(2);
+    return fixed.replaceAllMapped(
+      RegExp(r'\B(?=(\d{3})+(?!\d))'),
+      (match) => ',',
+    );
+  }
 }

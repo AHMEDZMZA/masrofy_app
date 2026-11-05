@@ -19,6 +19,7 @@ class HomeTab extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            AppSizes.s.verticalSpace,
             HomeAppBar().paddingAll(AppSizes.s),
             AppSizes.l.verticalSpace,
             SummeryCard().paddingAll(AppSizes.m),

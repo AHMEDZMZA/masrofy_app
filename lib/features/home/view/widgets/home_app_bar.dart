@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
-import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
-
 import '../../../../core/service/firebase_service.dart';
 
 class HomeAppBar extends ConsumerWidget {
@@ -35,9 +33,7 @@ class HomeAppBar extends ConsumerWidget {
             AppSizes.s.verticalSpace,
             Text(
               'التحكم في أموالك هو أول خطوة للحرية الماليه',
-              style: context.textTheme.bodySmall!.copyWith(
-                color: AppColors.grey300,
-              ),
+              style: context.textTheme.bodySmall
             ),
           ],
         ),

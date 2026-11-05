@@ -195,5 +195,26 @@
     "months_sep": "سبتمبر",
     "months_oct": "أكتوبر",
     "months_nov": "نوفمبر",
-    "months_dec": "ديسمبر"
+    "months_dec": "ديسمبر",
+
+    "filter_this_month": "هذا الشهر",
+    "filter_last_month": "الشهر الماضي",
+    "filter_this_year": "هذا العام",
+    "filter_all": "الكل",
+
+    "reports_error_occurred": "حدث خطأ ما",
+    "reports_from_last_year": "من العام الماضي",
+    "reports_no_expenses_period": "لا توجد مصروفات مسجلة لهذه الفترة",
+
+    "currency_egp_short": "ج.م",
+    "more_language_english": "الإنجليزية",
+    "goals_of_target": "من {target} ج.م",
+
+    "common_cancel": "إلغاء",
+    "common_delete": "حذف",
+    "common_save": "حفظ",
+    "common_edit": "تعديل",
+    "common_confirm": "تأكيد",
+    "common_close": "إغلاق",
+    "common_retry": "إعادة المحاولة"
 }
