@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -7,15 +8,21 @@ import 'package:masrofy/core/extensions/widget_extension.dart';
 import 'package:masrofy/core/themes/app_colors.dart';
 import 'package:masrofy/core/themes/app_sizes.dart';
 
-class OverviewSection extends StatelessWidget {
+import '../../controllers/statistics_providers.dart';
+
+class OverviewSection extends ConsumerWidget {
   const OverviewSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todayExpense = ref.watch(todayExpenseProvider);
+    final thisMonthIncome = ref.watch(thisMonthIncomeProvider);
+    final thisDebts = ref.watch(unpaidDebtsProvider);
+    final goalsProgress = ref.watch(goalsProgressProvider);
     final overviewItems = [
       {
         'title': "مصاريف اليوم",
-        'value': '460',
+        'value': todayExpense.toStringAsFixed(2),
         'currency': 'ج م',
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': true,
@@ -27,7 +34,7 @@ class OverviewSection extends StatelessWidget {
       },
       {
         'title': "دخل الشهر الحالي",
-        'value': '8,250',
+        'value': thisMonthIncome.toStringAsFixed(2),
         'currency': 'ج م',
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': false,
@@ -36,7 +43,7 @@ class OverviewSection extends StatelessWidget {
       },
       {
         'title': "إجمالي الديون",
-        'value': '5,200',
+        'value': thisDebts.toStringAsFixed(2),
         'currency': 'ج م',
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': true,
@@ -46,7 +53,7 @@ class OverviewSection extends StatelessWidget {
       },
       {
         'title': "الأهداف المكتملة",
-        'value': '3 / 5',
+        'value': '${goalsProgress.completed}/${goalsProgress.total}',
         'currency': '',
         'icon': Icons.track_changes_rounded,
         'hasFilter': false,

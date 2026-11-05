@@ -33,12 +33,12 @@ class QuickTools extends StatelessWidget {
         'color': AppColors.income,
         'route': AppRoutes.income,
       },
-      {
-        'label': "المصاريف",
-        'icon': Icons.shopping_bag_rounded,
-        'color': AppColors.expense,
-        'route': '',
-      },
+      // {
+      //   'label': "المصاريف",
+      //   'icon': Icons.shopping_bag_rounded,
+      //   'color': AppColors.expense,
+      //   'route': '',
+      // },
     ];
 
     return Column(

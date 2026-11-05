@@ -38,8 +38,9 @@ class _IncomePageState extends ConsumerState<IncomePage> {
             ),
             AppSizes.m.verticalSpace,
             state.when(
-              loading: () =>
-                  const CircularProgressIndicator().center().paddingAll(24),
+              loading: () => const CircularProgressIndicator.adaptive()
+                  .center()
+                  .paddingAll(AppSizes.xl),
               error: (_, _) => Text(
                 'تعذر تحميل الدخل',
                 style: context.textTheme.bodyMedium,
@@ -84,7 +85,7 @@ class _IncomePageState extends ConsumerState<IncomePage> {
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 horizontal: 16.w,
-                                vertical: 8.h,
+                                vertical: 12.h,
                               ),
                               decoration: BoxDecoration(
                                 color: active
