@@ -120,13 +120,32 @@ flutter run
 
 ## 📸 صور التطبيق
 
-> سيتم إضافة صور التطبيق قريباً...
-
----
-
-## 📄 الرخصة
-
-هذا المشروع مرخص تحت رخصة [MIT](LICENSE).
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 40 00 AM" src="https://github.com/user-attachments/assets/34c05ec5-7807-46a7-9575-2f79e141d2b1" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 40 00 AM (3)" src="https://github.com/user-attachments/assets/fa64ea09-6c70-4627-8037-2fd40df494e0" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 40 00 AM (2)" src="https://github.com/user-attachments/assets/e6fb69ee-205b-4bc2-9b8b-deb74f28fbd9" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 40 00 AM (1)" src="https://github.com/user-attachments/assets/498bfefa-9050-43dd-91fa-1f6b36205343" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 59 AM" src="https://github.com/user-attachments/assets/e1c12a54-e2ce-4c61-b39b-c168cbd1abd9" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 59 AM (4)" src="https://github.com/user-attachments/assets/5bbc6a02-b455-425a-aa51-04679cae446b" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 59 AM (3)" src="https://github.com/user-attachments/assets/543d27bc-45b9-44a0-8539-8201fa810c88" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 59 AM (2)" src="https://github.com/user-attachments/assets/f462d3ef-915b-40ef-b92b-24a8080211f3" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 59 AM (1)" src="https://github.com/user-attachments/assets/486c6ab7-1582-4497-90d1-464e067cddc7" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 58 AM" src="https://github.com/user-attachments/assets/c0c6aa76-1937-4abc-a5ee-e6e5cdcb195f" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 57 AM" src="https://github.com/user-attachments/assets/56e0b4e0-81f2-45d2-ba39-8f71ea97ef54" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 57 AM (3)" src="https://github.com/user-attachments/assets/079c2407-4952-4a96-b014-518d0eb5d5e9" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 57 AM (2)" src="https://github.com/user-attachments/assets/2f3c6ed8-2f3f-4036-a799-f3919456c5f4" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 57 AM (1)" src="https://github.com/user-attachments/assets/ddb452cb-2f29-4268-b9ce-b767c7f6692f" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 56 AM" src="https://github.com/user-attachments/assets/1ff90c1d-916d-4a5a-aed2-3842ef57dc89" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 55 AM" src="https://github.com/user-attachments/assets/1eb3fd62-ce5b-45e1-b764-c750c6f36e89" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 51 AM" src="https://github.com/user-attachments/assets/172b3c5c-bd94-496a-93b4-5cd768b2f85d" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 50 AM" src="https://github.com/user-attachments/assets/84a4f31d-b985-419b-951e-a968e69f7656" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 50 AM (3)" src="https://github.com/user-attachments/assets/f10e043f-cf4a-4ec7-a654-ad9765e03f23" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 50 AM (2)" src="https://github.com/user-attachments/assets/0a81a6c8-b14d-450f-a123-f1a32b919ead" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 50 AM (1)" src="https://github.com/user-attachments/assets/75b57032-b846-47cd-9ea4-e0f458f4db3f" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 49 AM" src="https://github.com/user-attachments/assets/ecacc1af-b6ac-456a-ae4b-fd3c9d36fd72" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 49 AM (2)" src="https://github.com/user-attachments/assets/21fc0073-71ad-4b21-95dd-66faa87cc72c" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 49 AM (1)" src="https://github.com/user-attachments/assets/b8c3f839-7604-4c98-a1b4-ab7f990809a2" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 48 AM" src="https://github.com/user-attachments/assets/15d5203e-f416-481b-9423-8c3fb12fc5be" />
+<img width="720" height="1600" alt="WhatsApp Image 2026-11-09 at 1 39 47 AM" src="https://github.com/user-attachments/assets/ab0f2d0d-8b9b-4523-aacf-f8eaa97b068f" />
 
 ---
 
