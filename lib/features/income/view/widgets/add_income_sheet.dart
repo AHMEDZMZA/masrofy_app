@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -44,7 +45,7 @@ class AddIncomeBottomSheet {
                   .read(incomeControllerProvider.notifier)
                   .deleteIncomeEntry(entry.id);
               messenger.showSnackBar(
-                const SnackBar(content: Text('تم حذف الدخل بنجاح')),
+                SnackBar(content: Text('income_delete_success'.tr())),
               );
             },
             onSave: () async {
@@ -55,8 +56,8 @@ class AddIncomeBottomSheet {
               final messenger = ScaffoldMessenger.of(ctx);
               if (title.isEmpty || amt <= 0) {
                 messenger.showSnackBar(
-                  const SnackBar(
-                    content: Text('أدخل اسمًا صحيحًا ومبلغًا أكبر من صفر'),
+                  SnackBar(
+                    content: Text('income_invalid_input'.tr()),
                   ),
                 );
                 return;
@@ -82,14 +83,14 @@ class AddIncomeBottomSheet {
                   SnackBar(
                     content: Text(
                       entry != null
-                          ? 'تم تعديل الدخل بنجاح'
-                          : 'تمت إضافة الدخل بنجاح',
+                          ? 'income_update_success'.tr()
+                          : 'income_add_success'.tr(),
                     ),
                   ),
                 );
               } catch (_) {
                 messenger.showSnackBar(
-                  const SnackBar(content: Text('حدث خطأ أثناء حفظ البيانات')),
+                  SnackBar(content: Text('income_save_error'.tr())),
                 );
               }
             },

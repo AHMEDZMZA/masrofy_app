@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/extensions/build_context.dart';
@@ -58,10 +59,10 @@ class GoalCard extends StatelessWidget {
                 children: [
                   Text(title, style: context.textTheme.titleMedium),
                   4.verticalSpace,
-                  Text('$current EGP', style: context.textTheme.bodyMedium),
+                  Text('$current ${'currency_egp_short'.tr()}', style: context.textTheme.bodyMedium),
                   2.verticalSpace,
                   Text(
-                    'من $target EGP',
+                    'goals_of_target'.tr(namedArgs: {'target': target}),
                     style: context.textTheme.bodySmall?.copyWith(
                       color: isDark
                           ? AppColors.textSecondaryDark

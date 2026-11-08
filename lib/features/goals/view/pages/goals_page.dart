@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,7 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CustomAppBar(
-              title: "الأهداف الماليه",
+              title: 'goals_title'.tr(),
               addNewItem: _showAddGoalSheet,
             ),
             goalsController.when(
@@ -70,9 +71,9 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _buildTabItem('نشطة', index: 0),
+                        _buildTabItem('goals_tab_active'.tr(), index: 0),
                         AppSizes.l.horizontalSpace,
-                        _buildTabItem('مكتملة', index: 1),
+                        _buildTabItem('goals_tab_completed'.tr(), index: 1),
                       ],
                     ),
                     AppSizes.l.verticalSpace,
@@ -89,7 +90,7 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
                             ),
                             AppSizes.m.verticalSpace,
                             Text(
-                              'لا توجد أهداف هنا',
+                              'goals_empty'.tr(),
                               style: context.textTheme.bodyMedium?.copyWith(
                                 color: AppColors.grey500,
                               ),
@@ -125,8 +126,8 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
                 );
               },
               error: (error, stackTrace) =>
-                  Text("تعذر تحميل الاهداف").center().paddingAll(AppSizes.l),
-              loading: () => CircularProgressIndicator.adaptive()
+                  Text('goals_load_error'.tr()).center().paddingAll(AppSizes.l),
+              loading: () => const CircularProgressIndicator.adaptive()
                   .center()
                   .paddingAll(AppSizes.l),
             ),
@@ -139,7 +140,7 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
   Widget _buildTabItem(String label, {required int index}) {
     final isSelected = _selectedTabIndex == index;
     final isDark = context.isDarkMode;
-    final activeColor = AppColors.purple;
+    const activeColor = AppColors.purple;
 
     return GestureDetector(
       onTap: () => setState(() => _selectedTabIndex = index),
@@ -208,12 +209,12 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تم حذف الهدف بنجاح')));
+      ).showSnackBar(SnackBar(content: Text('goals_delete_success'.tr())));
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('حدث خطأ اثناء حذف الهدف')));
+      ).showSnackBar(SnackBar(content: Text('goals_delete_error'.tr())));
     }
   }
 
@@ -228,7 +229,7 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
     if (newGoal.title.isEmpty || newGoal.target <= 0) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('أدخل اسمًا صحيحًا وهدفًا أكبر من صفر')),
+        SnackBar(content: Text('goals_invalid_input'.tr())),
       );
       return;
     }
@@ -247,7 +248,7 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            isEditing ? 'تم تعديل الهدف بنجاح' : 'تمت إضافة الهدف بنجاح',
+            isEditing ? 'goals_update_success'.tr() : 'goals_add_success'.tr(),
           ),
         ),
       );
@@ -257,8 +258,8 @@ class _GoalsPageState extends ConsumerState<GoalsPage> {
         SnackBar(
           content: Text(
             isEditing
-                ? 'حدث خطأ أثناء تعديل الهدف'
-                : 'حدث خطأ أثناء إضافة الهدف',
+                ? 'goals_update_error'.tr()
+                : 'goals_add_error'.tr(),
           ),
         ),
       );

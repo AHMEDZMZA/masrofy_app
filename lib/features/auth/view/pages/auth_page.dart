@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -20,31 +21,32 @@ class AuthPage extends StatelessWidget {
       child: Column(
         children: [
           const Spacer(flex: 2),
-          AppLogo(),
+          const AppLogo(),
           AppSizes.l.verticalSpace,
           Text(
-            "مصروفي",
+            'appTitle'.tr(),
             style: context.textTheme.displayLarge?.copyWith(
               color: isDark ? AppColors.white : AppColors.primary,
             ),
           ),
           AppSizes.l.verticalSpace,
           Text(
-            "مرحبا بك مجددا في مصروفي",
+            'auth_welcome'.tr(),
             style: context.textTheme.titleSmall?.copyWith(
               color: isDark ? AppColors.white : AppColors.primary,
             ),
           ),
           AppSizes.l.verticalSpace,
           Text(
-            "أدر مصروفاتك وديونك وأهدافك المالية في مكان واحد",
+            'auth_subtitle'.tr(),
             style: context.textTheme.titleSmall?.copyWith(
               color: isDark ? AppColors.grey100 : AppColors.primary,
             ),
+            textAlign: TextAlign.center,
           ),
           AppSizes.l.verticalSpace,
-          AuthBtn().paddingHorizontal(AppSizes.s),
-          Spacer(),
+          const AuthBtn().paddingHorizontal(AppSizes.s),
+          const Spacer(),
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
     final expense = ref.watch(thisMonthExpenseProvider);
     final balance = ref.watch(thisMonthBalanceProvider);
 
-    String mask(String val) => _isHidden ? '••••' : val;
+    String mask(String val) => _isHidden ? '****' : val;
 
     return Container(
       width: double.infinity,
@@ -53,7 +54,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text("الملخص المالي", style: context.textTheme.titleMedium),
+                    Text('home_summary_title'.tr(), style: context.textTheme.titleMedium),
                     AppSizes.s.horizontalSpace,
                     Icon(
                       _isHidden
@@ -75,7 +76,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "إجمالي الرصيد",
+                    'home_summary_balance'.tr(),
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: AppColors.white.withValues(alpha: 0.7),
                     ),
@@ -95,7 +96,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
                           ),
                           AppSizes.s.horizontalSpace,
                           Text(
-                            'جنيه',
+                            'home_currency'.tr(),
                             style: context.textTheme.titleMedium?.copyWith(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
@@ -115,7 +116,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
                   Row(
                     children: [
                       CardSubTitle(
-                        title: "إجمالي الدخل",
+                        title: 'home_summary_income'.tr(),
                         value: mask(income.toStringAsFixed(2)),
                         color: AppColors.primaryLight,
                       ),
@@ -129,7 +130,7 @@ class _SummeryCardState extends ConsumerState<SummeryCard> {
                       AppSizes.m.horizontalSpace,
 
                       CardSubTitle(
-                        title: "إجمالي المصروف",
+                        title: 'home_summary_expense'.tr(),
                         value: mask(expense.toStringAsFixed(2)),
                         color: AppColors.debt,
                       ),
@@ -189,7 +190,7 @@ class CardSubTitle extends StatelessWidget {
               ),
               AppSizes.s.horizontalSpace,
               Text(
-                'جنيه',
+                'home_currency'.tr(),
                 style: context.textTheme.bodySmall?.copyWith(
                   color: AppColors.primaryLight,
                 ),

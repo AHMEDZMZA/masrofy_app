@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/constants/app_assets.dart';
@@ -44,8 +45,7 @@ class GoalsSummaryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'الأهداف المكتملة',
-                  //  'إجمالي الأهداف',
+                  'goals_summary_completed'.tr(),
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: Colors.white.withValues(alpha: 0.8),
                     fontWeight: FontWeight.w500,
@@ -61,8 +61,7 @@ class GoalsSummaryCard extends StatelessWidget {
                 ),
                 AppSizes.s.verticalSpace,
                 Text(
-                  'من $total هدف',
-                  //'المكتملة من $total',
+                  'goals_summary_of_total'.tr(namedArgs: {'total': total}),
                   style: context.textTheme.bodySmall?.copyWith(
                     color: Colors.white.withValues(alpha: 0.9),
                     fontWeight: FontWeight.w500,

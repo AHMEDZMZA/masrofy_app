@@ -20,13 +20,13 @@ class HomeTab extends StatelessWidget {
         child: Column(
           children: [
             AppSizes.s.verticalSpace,
-            HomeAppBar().paddingAll(AppSizes.s),
+            const HomeAppBar().paddingAll(AppSizes.s),
             AppSizes.l.verticalSpace,
-            SummeryCard().paddingAll(AppSizes.m),
+            const SummeryCard().paddingAll(AppSizes.m),
             AppSizes.l.verticalSpace,
-            QuickTools(),
+            const QuickTools(),
             AppSizes.l.verticalSpace,
-            OverviewSection(),
+            const OverviewSection(),
           ],
         ),
       ),

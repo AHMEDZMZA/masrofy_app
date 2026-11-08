@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,23 +18,23 @@ class HomeAppBar extends ConsumerWidget {
       children: [
         CircleAvatar(
           radius: AppSizes.rXL,
-          backgroundImage: user!.photoURL != null
-              ? NetworkImage(user.photoURL!)
+          backgroundImage: user?.photoURL != null
+              ? NetworkImage(user!.photoURL!)
               : null,
-          child: user.photoURL == null ? const Icon(Icons.person) : null,
+          child: user?.photoURL == null ? const Icon(Icons.person) : null,
         ),
         AppSizes.s.horizontalSpace,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'مرحباً، ${user.displayName}',
+              '${'home_greeting'.tr()} ${user?.displayName ?? ''}',
               style: context.textTheme.titleLarge,
             ),
             AppSizes.s.verticalSpace,
             Text(
-              'التحكم في أموالك هو أول خطوة للحرية الماليه',
-              style: context.textTheme.bodySmall
+              'home_financial_tip'.tr(),
+              style: context.textTheme.bodySmall,
             ),
           ],
         ),

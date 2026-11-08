@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/extensions/build_context.dart';
@@ -60,7 +61,7 @@ class DebtCard extends StatelessWidget {
                     ),
                     2.verticalSpace,
                     Text(
-                      'تبقي',
+                      'debts_remaining_label'.tr(),
                       style: context.textTheme.labelSmall?.copyWith(
                         color: isDark
                             ? AppColors.textSecondaryDark
@@ -94,7 +95,7 @@ class DebtCard extends StatelessWidget {
                             backgroundColor: isDark
                                 ? AppColors.borderDark
                                 : AppColors.grey100,
-                            valueColor: AlwaysStoppedAnimation<Color>(
+                            valueColor: const AlwaysStoppedAnimation<Color>(
                               AppColors.debt,
                             ),
                           ),
@@ -118,7 +119,7 @@ class DebtCard extends StatelessWidget {
                     ),
                     2.verticalSpace,
                     Text(
-                      'الإجمالي',
+                      'debts_total_label'.tr(),
                       style: context.textTheme.labelSmall?.copyWith(
                         color: isDark
                             ? AppColors.textSecondaryDark

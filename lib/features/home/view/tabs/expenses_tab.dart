@@ -34,11 +34,11 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
     final checkDate = DateTime(date.year, date.month, date.day);
 
     if (checkDate == today) {
-      return 'اليوم';
+      return 'expenses_date_today'.tr();
     } else if (checkDate == yesterday) {
-      return 'أمس';
+      return 'expenses_date_yesterday'.tr();
     } else {
-      return DateFormat('d MMMM yyyy', 'ar').format(date);
+      return DateFormat('d MMMM yyyy', context.locale.languageCode).format(date);
     }
   }
 
@@ -52,7 +52,7 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
         children: [
           CustomAppBar(
             showBackButton: false,
-            title: 'المصروفات',
+            title: 'expenses_title'.tr(),
             addNewItem: () => AddExpenseBottomSheet.show(context),
           ).center(),
           AppSizes.m.verticalSpace,
@@ -127,7 +127,7 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
                         ),
                         AppSizes.m.verticalSpace,
                         Text(
-                          'لا توجد مصروفات مسجلة لهذا الشهر',
+                          'expenses_empty'.tr(),
                           style: context.textTheme.bodyMedium?.copyWith(
                             color: AppColors.grey500,
                           ),
@@ -136,7 +136,7 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
                         FilledButton.icon(
                           onPressed: () => AddExpenseBottomSheet.show(context),
                           icon: const Icon(Icons.add_rounded),
-                          label: Text('إضافة مصروف'),
+                          label: Text('expenses_add_btn'.tr()),
                           style: FilledButton.styleFrom(
                             backgroundColor: AppColors.expense,
                             foregroundColor: Colors.white,
@@ -221,7 +221,7 @@ class _ExpensesTabState extends ConsumerState<ExpensesTab> {
             },
 
             error: (err, stack) => Text(
-              "تعذر تحميل المصروفات",
+              'expenses_load_error'.tr(),
               style: context.textTheme.bodyMedium,
             ).center().paddingAll(AppSizes.xl),
             loading: () => const CircularProgressIndicator.adaptive()
@@ -263,7 +263,7 @@ class _ExpensesSummaryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'اجمالى المصروفات',
+                'expenses_total_label'.tr(),
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w500,
@@ -326,7 +326,7 @@ class _TransactionItem extends StatelessWidget {
     final category = ExpenseCategory.getById(expenseEntryModel.category);
 
     ///final categoryName = category.nameAr;
-    final timeStr = DateFormat('jm', 'ar').format(expenseEntryModel.date);
+    final timeStr = DateFormat('jm', context.locale.languageCode).format(expenseEntryModel.date);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.m, vertical: 12.h),

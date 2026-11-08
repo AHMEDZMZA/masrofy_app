@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -63,73 +64,70 @@ class IncomeFormSheet extends StatelessWidget {
                 ),
               ),
               AppSizes.m.verticalSpace,
-        
+
               // Title
               Text(
-                isEditing ? 'تعديل الدخل' : 'إضافة دخل جديد',
+                isEditing ? 'income_form_edit_title'.tr() : 'income_form_add_title'.tr(),
                 style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
               AppSizes.l.verticalSpace,
-        
+
               // Title field
               TextFormField(
                 controller: titleController,
-                textDirection: TextDirection.rtl,
-                decoration: const InputDecoration(
-                  labelText: 'اسم الدخل',
-                  hintText: 'مثال: راتب شهر يوليو',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.title_rounded),
+                decoration: InputDecoration(
+                  labelText: 'income_form_field_name'.tr(),
+                  hintText: 'income_form_field_name_hint'.tr(),
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.title_rounded),
                 ),
                 validator: (v) =>
-                (v == null || v.trim().isEmpty) ? 'أدخل اسم الدخل' : null,
+                (v == null || v.trim().isEmpty) ? 'income_form_field_name_error'.tr() : null,
               ),
               AppSizes.m.verticalSpace,
-        
+
               // Amount field
               TextFormField(
                 controller: amountController,
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
-                textDirection: TextDirection.ltr,
                 textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                  labelText: 'المبلغ',
+                decoration: InputDecoration(
+                  labelText: 'income_form_field_amount'.tr(),
                   hintText: '0.00',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.payments_rounded),
-                  suffixText: 'EGP',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.payments_rounded),
+                  suffixText: 'currency_egp_short'.tr(),
                 ),
                 validator: (v) {
                   final n = double.tryParse(v ?? '');
-                  return (n == null || n <= 0) ? 'أدخل مبلغًا أكبر من صفر' : null;
+                  return (n == null || n <= 0) ? 'income_form_field_amount_error'.tr() : null;
                 },
               ),
               AppSizes.m.verticalSpace,
-        
+
               // Description field
               TextField(
                 controller: descriptionController,
-                textDirection: TextDirection.rtl,
-                decoration: const InputDecoration(
-                  labelText: 'وصف (اختياري)',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.notes_rounded),
+                decoration: InputDecoration(
+                  labelText: 'income_form_field_description'.tr(),
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.notes_rounded),
                 ),
               ),
               AppSizes.l.verticalSpace,
-        
+
               // Category selector
               Text(
-                'التصنيف',
+                'income_form_category_label'.tr(),
                 style: context.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
-                textAlign: TextAlign.right,
+                textAlign: TextAlign.start,
               ),
               AppSizes.s.verticalSpace,
               SizedBox(
@@ -144,7 +142,7 @@ class IncomeFormSheet extends StatelessWidget {
                     final key = category.key;
                     final isSelected = selectedCategory == key;
                     final color = category.color;
-        
+
                     return GestureDetector(
                       onTap: () => onCategoryChanged(key),
                       child: Column(
@@ -196,7 +194,7 @@ class IncomeFormSheet extends StatelessWidget {
                 ),
               ),
               AppSizes.l.verticalSpace,
-        
+
               // Actions
               Column(
                 children: [
@@ -205,9 +203,9 @@ class IncomeFormSheet extends StatelessWidget {
                       width: double.infinity,
                       child: TextButton(
                         onPressed: onDelete,
-                        child: const Text(
-                          'حذف الدخل',
-                          style: TextStyle(color: AppColors.error),
+                        child: Text(
+                          'income_form_delete_btn'.tr(),
+                          style: const TextStyle(color: AppColors.error),
                         ),
                       ),
                     ),
@@ -215,7 +213,7 @@ class IncomeFormSheet extends StatelessWidget {
                     width: double.infinity,
                     child: FilledButton(
                       onPressed: onSave,
-                      child: Text(isEditing ? 'تحديث الدخل' : 'حفظ الدخل'),
+                      child: Text(isEditing ? 'income_form_update_btn'.tr() : 'income_form_save_btn'.tr()),
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,9 +22,9 @@ class OverviewSection extends ConsumerWidget {
     final goalsProgress = ref.watch(goalsProgressProvider);
     final overviewItems = [
       {
-        'title': "مصاريف اليوم",
+        'title': 'home_overview_today_expense'.tr(),
         'value': todayExpense.toStringAsFixed(2),
-        'currency': 'ج م',
+        'currency': 'currency_egp_short'.tr(),
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': true,
         'filterColor': AppColors.error,
@@ -33,18 +34,18 @@ class OverviewSection extends ConsumerWidget {
             : AppColors.grey800,
       },
       {
-        'title': "دخل الشهر الحالي",
+        'title': 'home_overview_month_income'.tr(),
         'value': thisMonthIncome.toStringAsFixed(2),
-        'currency': 'ج م',
+        'currency': 'currency_egp_short'.tr(),
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': false,
         'color': AppColors.success,
         'valueColor': AppColors.success,
       },
       {
-        'title': "إجمالي الديون",
+        'title': 'home_overview_total_debts'.tr(),
         'value': thisDebts.toStringAsFixed(2),
-        'currency': 'ج م',
+        'currency': 'currency_egp_short'.tr(),
         'icon': Icons.account_balance_wallet_outlined,
         'hasFilter': true,
         'filterColor': AppColors.warning,
@@ -52,7 +53,7 @@ class OverviewSection extends ConsumerWidget {
         'valueColor': AppColors.error,
       },
       {
-        'title': "الأهداف المكتملة",
+        'title': 'home_overview_goals_completed'.tr(),
         'value': '${goalsProgress.completed}/${goalsProgress.total}',
         'currency': '',
         'icon': Icons.track_changes_rounded,
@@ -67,7 +68,7 @@ class OverviewSection extends ConsumerWidget {
       children: [
         Align(
           alignment: Alignment.centerRight,
-          child: Text("نظرة عامة", style: context.textTheme.titleMedium),
+          child: Text('home_overview_title'.tr(), style: context.textTheme.titleMedium),
         ),
         AppSizes.m.verticalSpace,
         Container(

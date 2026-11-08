@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -63,7 +64,7 @@ class ExpenseFormSheet extends StatelessWidget {
 
             // Title
             Text(
-              isEditing ? 'تعديل المصروف' : 'إضافة مصروف جديد',
+              isEditing ? 'expenses_form_edit_title'.tr() : 'expenses_form_add_title'.tr(),
               style: context.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -73,25 +74,25 @@ class ExpenseFormSheet extends StatelessWidget {
 
             CustomTextField(
               controller: titleController,
-              label: 'اسم المصروف',
-              hint: 'مثال: مشتريات البقالة',
+              label: 'expenses_form_field_name'.tr(),
+              hint: 'expenses_form_field_name_hint'.tr(),
               prefixIcon: const Icon(Icons.title_rounded),
             ),
             AppSizes.m.verticalSpace,
 
             CustomTextField(
               controller: amountController,
-              label: 'المبلغ',
+              label: 'expenses_form_field_amount'.tr(),
               hint: '0.00',
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
               prefixIcon: const Icon(Icons.payments_rounded),
-              suffixIcon: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                 child: Text(
-                  'EGP',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'currency_egp_short'.tr(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -99,18 +100,18 @@ class ExpenseFormSheet extends StatelessWidget {
 
             CustomTextField(
               controller: descriptionController,
-              label: 'وصف (اختياري)',
+              label: 'expenses_form_field_description'.tr(),
               prefixIcon: const Icon(Icons.notes_rounded),
             ),
             AppSizes.l.verticalSpace,
 
             // Category selector
             Text(
-              'التصنيف',
+              'expenses_form_category_label'.tr(),
               style: context.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.right,
+              textAlign: TextAlign.start,
             ),
             AppSizes.s.verticalSpace,
             SizedBox(
@@ -159,7 +160,7 @@ class ExpenseFormSheet extends StatelessWidget {
                         ),
                         4.verticalSpace,
                         Text(
-                          category.nameAr, // Arabic label
+                          category.name,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: isSelected
                                 ? (isDark ? Colors.white : Colors.black)
@@ -186,9 +187,9 @@ class ExpenseFormSheet extends StatelessWidget {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: onDelete,
-                      child: const Text(
-                        'حذف المصروف',
-                        style: TextStyle(color: AppColors.error),
+                      child: Text(
+                        'expenses_form_delete_btn'.tr(),
+                        style: const TextStyle(color: AppColors.error),
                       ),
                     ),
                   ),
@@ -196,7 +197,7 @@ class ExpenseFormSheet extends StatelessWidget {
                   width: double.infinity,
                   child: FilledButton(
                     onPressed: onSave,
-                    child: Text(isEditing ? 'تحديث المصروف' : 'حفظ المصروف'),
+                    child: Text(isEditing ? 'expenses_form_update_btn'.tr() : 'expenses_form_save_btn'.tr()),
                   ),
                 ),
               ],

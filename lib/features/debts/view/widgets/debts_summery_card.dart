@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/extensions/build_context.dart';
@@ -43,7 +44,7 @@ class DebtsSummaryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'إجمالي الديون',
+                'debts_total'.tr(),
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w500,
@@ -63,7 +64,7 @@ class DebtsSummaryCard extends StatelessWidget {
                   ),
                   AppSizes.s.horizontalSpace,
                   Text(
-                    'EGP',
+                    'currency_egp_short'.tr(),
                     style: context.textTheme.headlineMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class DebtsSummaryCard extends StatelessWidget {
               ),
               AppSizes.s.verticalSpace,
               Text(
-                'متبقي',
+                'debts_remaining'.tr(),
                 style: context.textTheme.bodySmall?.copyWith(
                   color: Colors.white.withValues(alpha: 0.9),
                 ),
@@ -107,7 +108,7 @@ class DebtsSummaryCard extends StatelessWidget {
               ),
               AppSizes.s.verticalSpace,
               Text(
-                'تم السداد',
+                'debts_paid_percentage'.tr(),
                 style: context.textTheme.bodySmall?.copyWith(
                   color: Colors.white.withValues(alpha: 0.9),
                   fontWeight: FontWeight.w500,

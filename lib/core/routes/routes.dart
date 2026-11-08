@@ -22,13 +22,13 @@ final routerProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      GoRoute(path: AppRoutes.auth, builder: (context, state) => AuthPage()),
-      GoRoute(path: AppRoutes.home, builder: (context, state) => HomePage()),
-      GoRoute(path: AppRoutes.goals, builder: (context, state) => GoalsPage()),
-      GoRoute(path: AppRoutes.debts, builder: (context, state) => DebtsPage()),
+      GoRoute(path: AppRoutes.auth, builder: (context, state) => const AuthPage()),
+      GoRoute(path: AppRoutes.home, builder: (context, state) => const HomePage()),
+      GoRoute(path: AppRoutes.goals, builder: (context, state) => const GoalsPage()),
+      GoRoute(path: AppRoutes.debts, builder: (context, state) => const DebtsPage()),
       GoRoute(
         path: AppRoutes.income,
-        builder: (context, state) => IncomePage(),
+        builder: (context, state) => const IncomePage(),
       ),
     ],
   );

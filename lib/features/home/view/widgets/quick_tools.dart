@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -16,19 +17,19 @@ class QuickTools extends StatelessWidget {
   Widget build(BuildContext context) {
     final tools = [
       {
-        'label': "الأهداف",
+        'label': 'home_quick_tools_goals'.tr(),
         'icon': Icons.track_changes_rounded,
         'color': AppColors.purple,
         'route': AppRoutes.goals,
       },
       {
-        'label': "الديون",
+        'label': 'home_quick_tools_debts'.tr(),
         'icon': Icons.account_balance_wallet_rounded,
         'color': AppColors.warning,
         'route': AppRoutes.debts,
       },
       {
-        'label': "الدخل",
+        'label': 'home_quick_tools_income'.tr(),
         'icon': Icons.trending_up_rounded,
         'color': AppColors.income,
         'route': AppRoutes.income,
@@ -46,7 +47,7 @@ class QuickTools extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.centerRight,
-          child: Text("أدوات سريعه", style: context.textTheme.titleMedium),
+          child: Text('home_quick_tools_title'.tr(), style: context.textTheme.titleMedium),
         ),
         AppSizes.m.verticalSpace,
 

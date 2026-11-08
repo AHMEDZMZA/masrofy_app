@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -56,7 +57,7 @@ class GoalForm extends StatelessWidget {
               ).center(),
               AppSizes.m.verticalSpace,
               Text(
-                isEditing ? 'تعديل الهدف' : 'إضافة هدف جديد',
+                isEditing ? 'goals_form_edit_title'.tr() : 'goals_form_add_title'.tr(),
                 style: context.textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -64,12 +65,12 @@ class GoalForm extends StatelessWidget {
               AppSizes.m.verticalSpace,
               TextFormField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                  labelText: 'اسم الهدف',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: 'goals_form_field_name'.tr(),
+                  border: const OutlineInputBorder(),
                 ),
                 validator: (v) =>
-                (v == null || v.trim().isEmpty) ? 'أدخل اسم الهدف' : null,
+                    (v == null || v.trim().isEmpty) ? 'goals_form_field_name_error'.tr() : null,
               ),
               AppSizes.m.verticalSpace,
               TextField(
@@ -77,9 +78,9 @@ class GoalForm extends StatelessWidget {
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
-                decoration: const InputDecoration(
-                  labelText: 'المبلغ الحالي',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: 'goals_form_field_current'.tr(),
+                  border: const OutlineInputBorder(),
                 ),
               ),
               AppSizes.m.verticalSpace,
@@ -88,13 +89,13 @@ class GoalForm extends StatelessWidget {
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
-                decoration: const InputDecoration(
-                  labelText: 'الهدف النهائي',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: 'goals_form_field_target'.tr(),
+                  border: const OutlineInputBorder(),
                 ),
                 validator: (v) {
                   final n = double.tryParse(v ?? '');
-                  return (n == null || n <= 0) ? 'أدخل مبلغًا أكبر من صفر' : null;
+                  return (n == null || n <= 0) ? 'goals_form_field_target_error'.tr() : null;
                 },
               ),
               AppSizes.l.verticalSpace,
@@ -107,7 +108,7 @@ class GoalForm extends StatelessWidget {
                         width: double.infinity,
                         child: TextButton(
                           onPressed: onDelete,
-                          child: const Text('حذف الهدف'),
+                          child: Text('goals_form_delete_btn'.tr()),
                         ),
                       ),
                     FilledButton(
@@ -116,7 +117,7 @@ class GoalForm extends StatelessWidget {
                           onSave();
                         }
                       },
-                      child: Text(isEditing ? 'تحديث الهدف' : 'حفظ الهدف'),
+                      child: Text(isEditing ? 'goals_form_update_btn'.tr() : 'goals_form_save_btn'.tr()),
                     ),
                   ],
                 ),

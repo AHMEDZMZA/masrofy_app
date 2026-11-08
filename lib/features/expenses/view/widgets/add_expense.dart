@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -43,7 +44,7 @@ class AddExpenseBottomSheet {
                         .read(expenseControllerProvider.notifier)
                         .deleteExpenseEntry(entry.id);
                     messenger.showSnackBar(
-                      const SnackBar(content: Text('تم حذف المصروف بنجاح')),
+                      SnackBar(content: Text('expenses_delete_success'.tr())),
                     );
                   },
             onSave: () async {
@@ -53,8 +54,8 @@ class AddExpenseBottomSheet {
               final messenger = ScaffoldMessenger.of(ctx);
               if (title.isEmpty || amt <= 0) {
                 messenger.showSnackBar(
-                  const SnackBar(
-                    content: Text('أدخل اسمًا صحيحًا ومبلغًا أكبر من صفر'),
+                  SnackBar(
+                    content: Text('expenses_invalid_input'.tr()),
                   ),
                 );
                 return;
@@ -81,14 +82,14 @@ class AddExpenseBottomSheet {
                   SnackBar(
                     content: Text(
                       entry != null
-                          ? 'تم تعديل المصروف بنجاح'
-                          : 'تمت إضافة المصروف بنجاح',
+                          ? 'expenses_update_success'.tr()
+                          : 'expenses_add_success'.tr(),
                     ),
                   ),
                 );
               } catch (_) {
                 messenger.showSnackBar(
-                  const SnackBar(content: Text('حدث خطأ أثناء حفظ البيانات')),
+                  SnackBar(content: Text('expenses_save_error'.tr())),
                 );
               }
             },

@@ -137,7 +137,7 @@ class ReportsNotifier extends AsyncNotifier<ReportDataItems> {
       final category = ExpenseCategory.getById(entry.key);
       return CategoryReportModel(
         categoryId: entry.key,
-        label: category.nameAr,
+        label: category.name,
         amount: entry.value,
         percentage: totalExpense > 0 ? entry.value / totalExpense : 0.0,
         color: category.color,

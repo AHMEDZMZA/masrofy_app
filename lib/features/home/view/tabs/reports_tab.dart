@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class ReportsTab extends ConsumerWidget {
         children: [
           // ── Header ──
           Text(
-            'الملخص والإحصائيات',
+            'reports_title'.tr(),
             style: context.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -84,7 +85,7 @@ class ReportsTab extends ConsumerWidget {
           AppSizes.m.verticalSpace,
           reportsController.when(
             error: (error, stack) =>
-                Text('حدث خطأ ما').center().paddingAll(AppSizes.xl),
+                Text('reports_error_occurred'.tr()).center().paddingAll(AppSizes.xl),
             loading: () => const CircularProgressIndicator.adaptive()
                 .center()
                 .paddingAll(AppSizes.xl),
@@ -105,8 +106,8 @@ class ReportsTab extends ConsumerWidget {
               }
 
               final subText = filter == ReportsFilter.thisYear
-                  ? 'من العام الماضي'
-                  : 'من الشهر الماضي';
+                  ? 'reports_from_last_year'.tr()
+                  : 'reports_from_last_month'.tr();
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -114,7 +115,7 @@ class ReportsTab extends ConsumerWidget {
                   Row(
                     children: [
                       _StatCard(
-                        label: 'إجمالي الدخل',
+                        label: 'reports_total_income'.tr(),
                         amount: data.totalIncome.formatAmount,
                         changeText: getChangeText(data.incomeChange),
                         changeColor: getChangeColor(data.incomeChange, true),
@@ -122,7 +123,7 @@ class ReportsTab extends ConsumerWidget {
                       ),
                       AppSizes.m.horizontalSpace,
                       _StatCard(
-                        label: 'إجمالي المصروفات',
+                        label: 'reports_total_expenses'.tr(),
                         amount: data.totalExpenses.formatAmount,
                         changeText: getChangeText(data.expenseChange),
                         changeColor: getChangeColor(data.expenseChange, false),
@@ -134,15 +135,15 @@ class ReportsTab extends ConsumerWidget {
                   Row(
                     children: [
                       _StatCard(
-                        label: 'صافي الدخل',
+                        label: 'reports_net_income'.tr(),
                         amount: data.netIncome.formatAmount,
                         subText: '',
                       ),
                       AppSizes.m.horizontalSpace,
                       _StatCard(
-                        label: 'معدل التوفير',
+                        label: 'reports_saving_rate'.tr(),
                         amount: "${data.savingRate.toStringAsFixed(0)}%",
-                        subText: 'من الدخل',
+                        subText: 'reports_from_income'.tr(),
                         isPercentage: true,
                       ),
                     ],
@@ -163,7 +164,7 @@ class ReportsTab extends ConsumerWidget {
                       children: [
                         // Section Title
                         Text(
-                          'المصروفات حسب الفئة',
+                          'reports_expenses_by_category'.tr(),
                           style: context.textTheme.titleMedium,
                           textAlign: TextAlign.center,
                         ),
@@ -302,7 +303,7 @@ class _DonutChart extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'إجمالي',
+              'reports_total'.tr(),
               style: context.textTheme.bodySmall?.copyWith(
                 color: context.isDarkMode
                     ? AppColors.textSecondaryDark
@@ -391,7 +392,7 @@ class _CategoryLegend extends StatelessWidget {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h),
         child: Text(
-          'لا توجد مصروفات مسجلة لهذه الفترة',
+          'reports_no_expenses_period'.tr(),
           style: context.textTheme.bodyMedium?.copyWith(
             color: isDark
                 ? AppColors.textSecondaryDark

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:masrofy/core/themes/app_colors.dart';
 
@@ -14,6 +15,7 @@ class ExpenseCategory {
     required this.color,
   });
 
+  String get name => 'expense_category_$id'.tr();
 
   static const List<ExpenseCategory> categories = [
     ExpenseCategory(
@@ -62,8 +64,8 @@ class ExpenseCategory {
 
   static ExpenseCategory getById(String id) {
     return categories.firstWhere(
-          (cat) => cat.id == id,
-      orElse: () => categories.last, // Fallback to 'other'
+      (cat) => cat.id == id,
+      orElse: () => categories.last,
     );
   }
 }

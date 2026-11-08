@@ -18,15 +18,15 @@ class MyApp extends ConsumerWidget {
       path: "assets/translations",
       fallbackLocale: const Locale('ar'),
       child: ScreenUtilInit(
-        designSize: Size(360, 690),
+        designSize: const Size(360, 690),
         minTextAdapt: true,
         builder: (context, child) {
           return MaterialApp.router(
-            locale: Locale('ar'),
+            locale: context.locale,
             supportedLocales: context.supportedLocales,
             localizationsDelegates: context.localizationDelegates,
             debugShowCheckedModeBanner: false,
-            title: 'مصروفي',
+            title: 'appTitle'.tr(),
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,
             themeMode: themeMode,

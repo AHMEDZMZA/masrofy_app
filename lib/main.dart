@@ -15,5 +15,5 @@ Future<void> main() async {
     serverClientId:
         "406922052626-u8cflou90d8p8e6v2giplrlqc2t0gep9.apps.googleusercontent.com",
   );
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }

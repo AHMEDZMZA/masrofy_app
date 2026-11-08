@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -49,7 +50,7 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Header Row
-            CustomAppBar(title: "الديون", addNewItem: _showDebtFormSheet),
+            CustomAppBar(title: 'debts_title'.tr(), addNewItem: _showDebtFormSheet),
 
             AppSizes.m.verticalSpace,
 
@@ -93,9 +94,9 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
                       textDirection: TextDirection.rtl,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildTabItem('كل الديون', index: 0),
-                        _buildTabItem('متبقي', index: 1),
-                        _buildTabItem('مسددة', index: 2),
+                        _buildTabItem('debts_tab_all'.tr(), index: 0),
+                        _buildTabItem('debts_tab_remaining'.tr(), index: 1),
+                        _buildTabItem('debts_tab_paid'.tr(), index: 2),
                       ],
                     ),
                     AppSizes.l.verticalSpace,
@@ -113,7 +114,7 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
                             ),
                             AppSizes.m.verticalSpace,
                             Text(
-                              'لا توجد ديون حالياً',
+                              'debts_empty'.tr(),
                               style: context.textTheme.bodyMedium?.copyWith(
                                 color: AppColors.grey500,
                               ),
@@ -140,8 +141,8 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
                 );
               },
               error: (error, stackTrace) =>
-                  Text("تعذر تحميل الديون").center().paddingAll(AppSizes.l),
-              loading: () => CircularProgressIndicator.adaptive()
+                  Text('debts_load_error'.tr()).center().paddingAll(AppSizes.l),
+              loading: () => const CircularProgressIndicator.adaptive()
                   .center()
                   .paddingAll(AppSizes.l),
             ),
@@ -195,12 +196,12 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('تم حذف الدين بنجاح')));
+      ).showSnackBar(SnackBar(content: Text('debts_delete_success'.tr())));
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('حدث خطأ اثناء حذف الدين')));
+      ).showSnackBar(SnackBar(content: Text('debts_delete_error'.tr())));
     }
   }
 
@@ -213,8 +214,8 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
     if (title.isEmpty || total <= 0) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('أدخل عنوانًا صحيحًا ومبلغًا أكبر من صفر'),
+        SnackBar(
+          content: Text('debts_invalid_input'.tr()),
         ),
       );
       return;
@@ -246,7 +247,7 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            isEditing ? 'تم تعديل الدين بنجاح' : 'تمت إضافة الدين بنجاح',
+            isEditing ? 'debts_update_success'.tr() : 'debts_add_success'.tr(),
           ),
         ),
       );
@@ -256,8 +257,8 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
         SnackBar(
           content: Text(
             isEditing
-                ? 'حدث خطأ أثناء تعديل الدين'
-                : 'حدث خطأ أثناء إضافة الدين',
+                ? 'debts_update_error'.tr()
+                : 'debts_add_error'.tr(),
           ),
         ),
       );
@@ -267,7 +268,7 @@ class _DebtsPageState extends ConsumerState<DebtsPage> {
   Widget _buildTabItem(String label, {required int index}) {
     final isSelected = _selectedTabIndex == index;
     final isDark = context.isDarkMode;
-    final activeColor = AppColors.expense;
+    const activeColor = AppColors.expense;
 
     return GestureDetector(
       onTap: () => setState(() => _selectedTabIndex = index),

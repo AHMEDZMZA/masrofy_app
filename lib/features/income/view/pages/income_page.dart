@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class _IncomePageState extends ConsumerState<IncomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CustomAppBar(
-              title: 'الدخل',
+              title: 'income_title'.tr(),
               addNewItem: () => AddIncomeBottomSheet.show(context),
             ),
             AppSizes.m.verticalSpace,
@@ -42,7 +43,7 @@ class _IncomePageState extends ConsumerState<IncomePage> {
                   .center()
                   .paddingAll(AppSizes.xl),
               error: (_, _) => Text(
-                'تعذر تحميل الدخل',
+                'income_load_error'.tr(),
                 style: context.textTheme.bodyMedium,
               ).center().paddingAll(24),
               data: (entries) {
@@ -134,7 +135,7 @@ class _IncomePageState extends ConsumerState<IncomePage> {
                           ),
                           AppSizes.m.verticalSpace,
                           Text(
-                            'لا يوجد دخل مسجل لهذا الشهر',
+                            'income_empty'.tr(),
                             style: context.textTheme.bodyMedium?.copyWith(
                               color: AppColors.grey500,
                             ),
@@ -143,7 +144,7 @@ class _IncomePageState extends ConsumerState<IncomePage> {
                           FilledButton.icon(
                             onPressed: () => AddIncomeBottomSheet.show(context),
                             icon: const Icon(Icons.add_rounded),
-                            label: const Text('إضافة دخل'),
+                            label: Text('income_add_btn'.tr()),
                           ),
                         ],
                       ).center()

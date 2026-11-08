@@ -28,7 +28,7 @@ class MoreTab extends ConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Text("المزيد", style: context.textTheme.titleLarge),
+            Text('more_title'.tr(), style: context.textTheme.titleLarge),
             AppSizes.s.verticalSpace,
             // Profile Card Header
             _buildProfileCard(context, user),
@@ -37,7 +37,7 @@ class MoreTab extends ConsumerWidget {
             // Settings section list
             _buildSettingsSection(
               context: context,
-              title: 'تغيير المظهر',
+              title: 'more_section_appearance'.tr(),
               items: [
                 _buildThemeSelectorTile(context, ref, currentThemeMode),
                 _buildLanguageSelectorTile(context),
@@ -48,7 +48,7 @@ class MoreTab extends ConsumerWidget {
 
             _buildSettingsSection(
               context: context,
-              title: "الملف الشخصي",
+              title: 'more_section_profile'.tr(),
               items: [_buildLogoutTile(context, ref)],
             ),
           ],
@@ -58,7 +58,7 @@ class MoreTab extends ConsumerWidget {
   }
 
   Widget _buildProfileCard(BuildContext context, User? user) {
-    final name = user?.displayName ?? 'مستخدم';
+    final name = user?.displayName ?? 'more_default_user'.tr();
     final email = user?.email ?? '';
     final photoUrl = user?.photoURL;
 
@@ -194,14 +194,14 @@ class MoreTab extends ConsumerWidget {
   ) {
     final isDark = context.isDarkMode;
 
-    String modeName = "تلقائي";
+    String modeName = 'more_theme_auto'.tr();
     IconData modeIcon = Icons.settings_brightness_rounded;
 
     if (currentMode == ThemeMode.light) {
-      modeName = "المظهر الفاتح";
+      modeName = 'more_theme_light'.tr();
       modeIcon = Icons.light_mode_rounded;
     } else if (currentMode == ThemeMode.dark) {
-      modeName = "المظهر الداكن";
+      modeName = 'more_theme_dark'.tr();
       modeIcon = Icons.dark_mode_rounded;
     }
 
@@ -216,7 +216,7 @@ class MoreTab extends ConsumerWidget {
       title: Row(
         children: [
           Text(
-            "تغيير المظهر",
+            'more_theme_change'.tr(),
             style: context.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -259,7 +259,7 @@ class MoreTab extends ConsumerWidget {
       title: Row(
         children: [
           Text(
-            "تغيير اللغه",
+            'more_language_change'.tr(),
             style: context.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -267,7 +267,7 @@ class MoreTab extends ConsumerWidget {
           ).expanded(),
           SizedBox(width: 8.w),
           Text(
-            isArabic ? 'العربية' : 'English',
+            isArabic ? 'more_language_arabic'.tr() : 'more_language_english'.tr(),
             style: context.textTheme.bodyMedium?.copyWith(
               color: AppColors.primary,
             ),
@@ -306,7 +306,7 @@ class MoreTab extends ConsumerWidget {
       title: Align(
         alignment: Alignment.centerRight,
         child: Text(
-          "تسجيل الخروج",
+          'more_logout'.tr(),
           style: context.textTheme.bodyLarge?.copyWith(
             fontWeight: FontWeight.w600,
             color: AppColors.error,
@@ -366,7 +366,7 @@ class MoreTab extends ConsumerWidget {
               ),
               SizedBox(height: 16.h),
               Text(
-                "تغيير المظهر",
+                'more_theme_change'.tr(),
                 style: context.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -375,7 +375,7 @@ class MoreTab extends ConsumerWidget {
               _buildThemeOption(
                 context: context,
                 ref: ref,
-                title: "تلقائي",
+                title: 'more_theme_auto'.tr(),
                 mode: ThemeMode.system,
                 selected: currentMode == ThemeMode.system,
               ),
@@ -383,7 +383,7 @@ class MoreTab extends ConsumerWidget {
               _buildThemeOption(
                 context: context,
                 ref: ref,
-                title: "المظهر الفاتح",
+                title: 'more_theme_light'.tr(),
                 mode: ThemeMode.light,
                 selected: currentMode == ThemeMode.light,
               ),
@@ -391,7 +391,7 @@ class MoreTab extends ConsumerWidget {
               _buildThemeOption(
                 context: context,
                 ref: ref,
-                title: "المظهر الداكن",
+                title: 'more_theme_dark'.tr(),
                 mode: ThemeMode.dark,
                 selected: currentMode == ThemeMode.dark,
               ),

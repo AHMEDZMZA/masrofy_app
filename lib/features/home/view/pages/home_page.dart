@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -22,11 +23,11 @@ class _HomePageState extends State<HomePage> {
   int _currentNavIndex = 0; // الرئيسية selected by default
 
   final List<Widget> _tabs = [
-    HomeTab(),
-    ReportsTab(),
-    SizedBox.shrink(),
-    ExpensesTab(),
-    MoreTab(),
+    const HomeTab(),
+    const ReportsTab(),
+    const SizedBox.shrink(),
+    const ExpensesTab(),
+    const MoreTab(),
   ];
 
   @override
@@ -80,7 +81,7 @@ void _showAddSelectionSheet(BuildContext context) {
 
           // Title
           Text(
-            'إضافة عملية جديدة',
+            'home_add_new'.tr(),
             style: context.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -94,7 +95,7 @@ void _showAddSelectionSheet(BuildContext context) {
               Expanded(
                 child: _AddOptionCard(
                   icon: Icons.shopping_bag_rounded,
-                  label: 'مصروف',
+                  label: 'home_add_expense'.tr(),
                   color: AppColors.expense,
                   isDark: isDark,
                   onTap: () {
@@ -108,7 +109,7 @@ void _showAddSelectionSheet(BuildContext context) {
               Expanded(
                 child: _AddOptionCard(
                   icon: Icons.trending_up_rounded,
-                  label: 'دخل',
+                  label: 'home_add_income'.tr(),
                   color: AppColors.income,
                   isDark: isDark,
                   onTap: () {

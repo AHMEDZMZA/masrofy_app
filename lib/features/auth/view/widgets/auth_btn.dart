@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,7 +18,7 @@ class AuthBtn extends ConsumerWidget {
     final authController = ref.watch(authControllerProvider);
     return CustomButton(
       isLoading: authController.isLoading,
-      text: "التسجيل من خلال جوجل",
+      text: 'auth_sign_in_google'.tr(),
       variant: ButtonVariant.outlined,
       onPressed: () async {
         bool success = await ref

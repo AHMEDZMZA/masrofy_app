@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -55,7 +56,7 @@ class IncomeSummaryCard extends StatelessWidget {
 
           // Total income label
           Text(
-            'إجمالي الدخل',
+            'income_total_label'.tr(),
             style: context.textTheme.bodyMedium?.copyWith(
               color: Colors.white.withValues(alpha: 0.8),
               fontWeight: FontWeight.w500,
@@ -77,7 +78,7 @@ class IncomeSummaryCard extends StatelessWidget {
               ),
               AppSizes.s.horizontalSpace,
               Text(
-                'EGP',
+                'currency_egp_short'.tr(),
                 style: context.textTheme.titleMedium?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
@@ -97,7 +98,7 @@ class IncomeSummaryCard extends StatelessWidget {
               ),
               AppSizes.xs.horizontalSpace,
               Text(
-                '$entryCount ${entryCount == 1 ? 'إدخال' : 'إدخالات'}',
+                '$entryCount ${entryCount == 1 ? 'income_entry_singular'.tr() : 'income_entry_plural'.tr()}',
                 style: context.textTheme.bodySmall?.copyWith(
                   color: Colors.white.withValues(alpha: 0.8),
                   fontWeight: FontWeight.w500,

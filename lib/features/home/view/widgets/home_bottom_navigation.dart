@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -20,14 +21,14 @@ class HomeBottomNavigation extends StatelessWidget {
       _NavItem(
         icon: Icons.home_outlined,
         activeIcon: Icons.home_rounded,
-        label: 'الرئيسية',
+        label: 'nav_home'.tr(),
       ),
       _NavItem(
         icon: Icons.insert_chart_outlined_rounded,
         activeIcon: Icons.insert_chart_rounded,
-        label: 'التقاري',
+        label: 'nav_reports'.tr(),
       ),
-      _NavItem(
+      const _NavItem(
         icon: Icons.add,
         activeIcon: Icons.add,
         label: '',
@@ -36,12 +37,12 @@ class HomeBottomNavigation extends StatelessWidget {
       _NavItem(
         icon: Icons.receipt_long_outlined,
         activeIcon: Icons.receipt_long_rounded,
-        label: 'المعاملات',
+        label: 'nav_transactions'.tr(),
       ),
       _NavItem(
         icon: Icons.more_horiz_rounded,
         activeIcon: Icons.more_horiz_rounded,
-        label: 'المزيد',
+        label: 'nav_more'.tr(),
       ),
     ];
 

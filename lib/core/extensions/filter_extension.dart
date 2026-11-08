@@ -1,16 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:masrofy/features/home/controllers/reports_provider.dart';
 
 extension ReportsFilterExtension on ReportsFilter {
   String get name {
     switch (this) {
       case ReportsFilter.thisMonth:
-        return 'هذا الشهر';
+        return 'filter_this_month'.tr();
       case ReportsFilter.lastMonth:
-        return 'الشهر الماضي';
+        return 'filter_last_month'.tr();
       case ReportsFilter.thisYear:
-        return 'هذا العام';
+        return 'filter_this_year'.tr();
       case ReportsFilter.all:
-        return 'الكل';
+        return 'filter_all'.tr();
     }
   }
 }

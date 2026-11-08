@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masrofy/core/extensions/build_context.dart';
@@ -33,7 +34,6 @@ class IncomeSourceCard extends StatelessWidget {
           ),
         ),
         child: Row(
-          textDirection: TextDirection.rtl,
           children: [
             // Category icon
             Container(
@@ -85,7 +85,7 @@ class IncomeSourceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${entry.amount} EGP',
+                  '${entry.amount} ${'currency_egp_short'.tr()}',
                   style: context.textTheme.titleMedium?.copyWith(
                     color: AppColors.income,
                     fontWeight: FontWeight.bold,
