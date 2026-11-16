@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
 extension WidgetExtension on Widget {
   Widget paddingAll(double value) {
     return Padding(padding: EdgeInsets.all(value), child: this);

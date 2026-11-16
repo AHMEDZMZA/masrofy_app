@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// Widget.allPadding - Widget.horizontalPadding - Widget.verticalPadding - Widget.radius
